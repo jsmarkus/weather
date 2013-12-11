@@ -1,0 +1,17 @@
+{
+
+    "evil": true,
+    "regexdash": true,
+    "browser": true,
+    "wsh": true,
+    "trailing": true,
+    "sub": true,
+    "unused": true,
+    "undef": true,
+
+    "predef": [
+        "angular",
+        "define",
+        "global"
+    ]
+}

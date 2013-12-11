@@ -1,0 +1,40 @@
+<div class="weather" ng-if="weather.desc">
+    <table>
+        <tr>
+            <td>
+                <w:icon icon="weather.desc.icon"></w:icon>
+            </td>
+            <td>
+                <div class="temp">{{weather.main.temp}}</div>
+                <div class="description">{{weather.desc.description}}</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Давление</td>
+            <td>
+                <span class="value">{{weather.main.pressure | hpa2mmhg | number:0}}</span>
+                <span class="unit">мм рт.ст.</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Влажность</td>
+            <td>
+                <span class="value">{{weather.main.humidity | number:0}}</span>
+                <span class="unit">%</span>
+                </td>
+        </tr>
+
+        <tr>
+            <td>Ветер</td>
+            <td>
+                <span class="value">
+                    <w:wind angle="weather.wind.deg"></w:wind>
+                    {{weather.wind.speed | number:0}}
+                </span>
+                <span class="unit">м/с</span>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,163 @@
+<project name="nwpe" default="help" basedir=".">
+    <property name="sdk" location="/home/dude/opt/node-webkit-sdk" />
+    <property name="sdk.nw" location="${sdk}/node-webkit" />
+    <property name="sdk.ij" location="${sdk}/installjammer/installjammer" />
+    <property name="src" location="src" />
+    <property name="build" location="build" />
+    <property name="jammer" location="jammer" />
+
+    <target name="help">
+        <echo>
+ant help
+    - display this help
+
+ant app.nw
+    - create nw-package
+
+ant bin.l32
+    - create binary executable for 32-bit Linux
+
+ant bin.l64
+    - create binary executable for 64-bit Linux
+
+ant bin.win
+    - create binary executable for Windows
+
+ant bin.all
+    - create binary executables for all supported platforms
+
+ant dist.l32
+    - create installer package for 32-bit Linux
+
+ant dist.l64
+    - create installer package for 64-bit Linux
+
+ant dist.win
+    - create installer package for Windows
+
+ant dist.all
+    - create installer packages for all supported platforms
+
+ant distconf.l32
+    - configure installer package for 32-bit Linux
+
+ant distconf.l64
+    - configure installer package for 64-bit Linux
+
+ant distconf.win
+    - configure installer package for Windows
+
+        </echo>
+    </target>
+
+    <target name="init">
+        <mkdir dir="${build}" />
+    </target>
+
+    <target name="app.nw" depends="init">
+        <zip basedir="${src}" destfile="${build}/app.nw" />
+    </target>
+
+    <!-- Linux 64 bit binary -->
+    <target name="bin.l64" depends="app.nw">
+        <delete dir="${build}/l64" />
+        <copy todir="${build}/l64">
+            <fileset dir="${sdk.nw}/l64" />
+        </copy>
+
+        <concat binary="true" destfile="${build}/l64/app">
+            <fileset file="${build}/l64/nw" />
+            <fileset file="${build}/app.nw" />
+        </concat>
+
+        <delete file="${build}/l64/nw" />
+
+        <chmod file="${build}/l64/app" perm="ugo+x" />
+    </target>
+
+    <!-- Linux 32 bit binary -->
+    <target name="bin.l32" depends="app.nw">
+        <delete dir="${build}/l32" />
+        <copy todir="${build}/l32">
+            <fileset dir="${sdk.nw}/l32" />
+        </copy>
+
+        <concat binary="true" destfile="${build}/l32/app">
+            <fileset file="${build}/l32/nw" />
+            <fileset file="${build}/app.nw" />
+        </concat>
+
+        <delete file="${build}/l32/nw" />
+
+        <chmod file="${build}/l32/app" perm="ugo+x" />
+    </target>
+
+    <!-- Windows binary -->
+    <target name="bin.win" depends="app.nw">
+        <delete dir="${build}/win" />
+        <copy todir="${build}/win">
+            <fileset dir="${sdk.nw}/win" />
+        </copy>
+
+        <concat binary="true" destfile="${build}/win/app.exe">
+            <fileset file="${build}/win/nw.exe" />
+            <fileset file="${build}/app.nw" />
+        </concat>
+
+        <delete file="${build}/win/nw.exe" />
+
+        <chmod file="${build}/win/app.exe" perm="ugo+x" />
+    </target>
+
+    <!-- Windows binary -->
+    <target name="bin.all" depends="bin.l32,bin.l64,bin.win" />
+    <!--**********************************************************-->
+    <!--**********************************************************-->
+    <!--**********************************************************-->
+    <!--**********************************************************-->
+
+    <!-- Configure installjammer project Linux 64 bit -->
+    <target name="distconf.l64">
+        <exec executable="${sdk.ij}">
+            <arg value="--" />
+            <arg value="${jammer}/l64" />
+        </exec>
+    </target>
+    <!-- Configure installjammer project Linux 32 bit -->
+    <target name="distconf.l32">
+        <exec executable="${sdk.ij}">
+            <arg value="--" />
+            <arg value="${jammer}/l32" />
+        </exec>
+    </target>
+    <!-- Configure installjammer project Windows -->
+    <target name="distconf.win">
+        <exec executable="${sdk.ij}">
+            <arg value="--" />
+            <arg value="${jammer}/win" />
+        </exec>
+    </target>
+
+    <!-- Build installjammer project Linux 64 bit -->
+    <target name="dist.l64" depends="bin.l64">
+        <exec executable="${sdk.ij}">
+            <arg value="--build ${jammer}/l64" />
+        </exec>
+    </target>
+    <!-- Build installjammer project Linux 32 bit -->
+    <target name="dist.l32" depends="bin.l32">
+        <exec executable="${sdk.ij}">
+            <arg value="--build ${jammer}/l32" />
+        </exec>
+    </target>
+    <!-- Build installjammer project Windows -->
+    <target name="dist.win" depends="bin.win">
+        <exec executable="${sdk.ij}">
+            <arg value="--build ${jammer}/win" />
+        </exec>
+    </target>
+    <!-- Build installjammer projects for all platforms -->
+    <target name="dist.all" depends="dist.l32,dist.l64,dist.win" />
+
+
+</project>

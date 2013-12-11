@@ -1,0 +1,38 @@
+body {
+    font-family: 'Exo 2';
+    background: black;
+    color: white;
+}
+
+.w-wind {
+    display: inline-block;
+}
+
+.weather td {
+    padding: 0 2px;
+}
+
+.weather .description {
+    font-size: 2em;
+    font-weight: 100;
+}
+
+.weather .temp {
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.weather .w-icon {
+    display: inline-block;
+}
+
+.weather .unit {
+    display: inline-block;
+    font-weight: 100;
+}
+
+.weather .value {
+    display: inline-block;
+    width: 30px;
+    text-align: right;
+}
