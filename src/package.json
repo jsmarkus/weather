@@ -1,8 +1,8 @@
 {
-	"name": "app",
+	"name": "monitor",
 	"version": "0.0.1",
 	"main": "index.html",
 	"window": {
-		"toolbar": true
+		"toolbar": false
 	}
 }

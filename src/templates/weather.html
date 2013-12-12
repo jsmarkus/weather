@@ -6,6 +6,11 @@
             </td>
             <td>
                 <div class="temp">{{weather.main.temp}}</div>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
                 <div class="description">{{weather.desc.description}}</div>
             </td>
         </tr>
@@ -37,4 +42,7 @@
             </td>
         </tr>
     </table>
+    <div>
+        <a ng-click="updateWeather()" href="javascript:void(0)">Обновить</a>
+    </div>
 </div>

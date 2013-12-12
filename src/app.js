@@ -1,6 +1,7 @@
 define(function(require) {
     require('angular');
     require('services/weather');
+    require('services/tray');
     require('directives/w-icon');
     require('directives/w-wind');
     require('filters/hpa2mmhg');
@@ -18,14 +19,12 @@ define(function(require) {
     app.controller('DashboardController', [
         '$scope',
         'services.weather',
-        function($scope, svcWeather) {
+        'services.tray',
+        function($scope, svcWeather, svcTray) {
             $scope.weather = svcWeather.data;
-            // svcWeather.get().then(function(result) {
-            //     console.log(result);
-            //     $scope.weatherDesc = result.weather[0];
-            //     $scope.weatherMain = result.main;
-            //     $scope.weatherWind = result.wind;
-            // });
+            $scope.updateWeather = function () {
+                svcWeather.get();
+            };
         }
     ]);
 

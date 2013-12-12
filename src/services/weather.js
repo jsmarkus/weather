@@ -3,9 +3,16 @@ define(function(require) {
     require('services/module');
 
 
-    function Weather($http) {
+    function Weather($http, $interval) {
+        var self = this;
+
         this.$http = $http;
+        this.$interval = $interval;
         this.data = {};
+
+        this.$interval(function() {
+            self.get();
+        }, 60 * 15 * 1000);
         this.get();
     }
 
@@ -33,5 +40,9 @@ define(function(require) {
     };
 
     angular.module('services')
-        .service('services.weather', ['$http', Weather]);
+        .service('services.weather', [
+            '$http',
+            '$interval',
+            Weather
+        ]);
 });
