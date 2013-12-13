@@ -1,4 +1,9 @@
 <div class="weather">
+    <div>
+        <a ng-click="updateWeather()" href="">↻</a>
+        <a href="#/preferences">⚙</a>
+        <span>{{weather.locationName}}</a>
+    </div>
     <table ng-if="weather.desc">
         <tr>
             <td>
@@ -42,9 +47,6 @@
             </td>
         </tr>
     </table>
-    <div>
-        <a ng-click="updateWeather()" href="javascript:void(0)">↻</a>
-    </div>
     <div ng-if="!weather.online">Оффлайн</div>
     <div ng-if="weather.loading">Загрузка...</div>
 </div>

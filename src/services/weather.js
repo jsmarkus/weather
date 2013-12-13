@@ -3,22 +3,26 @@ define(function(require) {
     require('services/module');
 
 
-    function Weather($log, $http, $interval, $timeout, $rootScope) {
+    function Weather($log, $http, $interval, $timeout, $rootScope, $localStorage) {
         this.$log = $log;
         this.$http = $http;
         this.$interval = $interval;
         this.$timeout = $timeout;
         this.$rootScope = $rootScope;
+        this.$localStorage = $localStorage;
 
         this.data = {};
         this.__bindToOnline();
     }
 
     Weather.prototype.lang = 'ru';
-    Weather.prototype.location = 'Kharkiv,ua';
     Weather.prototype.units = 'metric';
     Weather.prototype.pollPeriod = 15 * 60 * 1000;
     Weather.prototype.pollDelay = 3 * 1000;
+
+    Weather.prototype.__getLocation = function () {
+        return this.$localStorage.location || 'Kharkiv,ua';
+    };
 
     Weather.prototype.__bindToOnline = function() {
         if (navigator.onLine) {
@@ -74,7 +78,7 @@ define(function(require) {
         this.$http
             .jsonp('http://api.openweathermap.org/data/2.5/weather?callback=JSON_CALLBACK', {
                 params: {
-                    q: this.location,
+                    q: this.__getLocation(),
                     lang: this.lang,
                     units: this.units
                 }
@@ -84,6 +88,7 @@ define(function(require) {
                 data.wind = res.wind;
                 data.main = res.main;
                 data.desc = res.weather[0];
+                data.locationName = res.name;
                 data.loading = false;
             }.bind(this))
             .error(function() {
@@ -98,6 +103,7 @@ define(function(require) {
             '$interval',
             '$timeout',
             '$rootScope',
+            '$localStorage',
             Weather
         ]);
 });

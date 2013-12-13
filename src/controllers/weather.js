@@ -8,7 +8,7 @@ define(function(require) {
     require('filters/hpa2mmhg');
 
     angular.module('controllers')
-        .controller('DashboardController', [
+        .controller('WeatherController', [
             '$scope',
             'services.weather',
             'services.tray',
