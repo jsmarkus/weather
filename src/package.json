@@ -1,8 +1,11 @@
 {
-	"name": "monitor",
-	"version": "0.0.1",
-	"main": "index.html",
-	"window": {
-		"toolbar": false
-	}
+    "name": "monitor",
+    "version": "0.0.1",
+    "main": "index.html",
+    "window": {
+        "toolbar": false,
+        "show": false,
+        "width": 320,
+        "height": 240
+    }
 }

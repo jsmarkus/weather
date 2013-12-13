@@ -1,5 +1,5 @@
-<div class="weather" ng-if="weather.desc">
-    <table>
+<div class="weather">
+    <table ng-if="weather.desc">
         <tr>
             <td>
                 <w:icon icon="weather.desc.icon"></w:icon>
@@ -43,6 +43,8 @@
         </tr>
     </table>
     <div>
-        <a ng-click="updateWeather()" href="javascript:void(0)">Обновить</a>
+        <a ng-click="updateWeather()" href="javascript:void(0)">↻</a>
     </div>
+    <div ng-if="!weather.online">Оффлайн</div>
+    <div ng-if="weather.loading">Загрузка...</div>
 </div>

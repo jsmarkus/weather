@@ -1,7 +1,14 @@
+@import url(font.css);
+
 body {
     font-family: 'Exo 2';
     background: black;
     color: white;
+}
+
+a {
+    text-decoration: none;
+    color: yellow;
 }
 
 .w-wind {

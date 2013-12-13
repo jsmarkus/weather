@@ -1,10 +1,3 @@
-if ('undefined' !== typeof process) {
-    var gui = require('nw.gui');
-    window.$gui = gui;
-    var win = gui.Window.get();
-    win.showDevTools();
-}
-
 
 requirejs.config({
     paths: {
@@ -13,7 +6,5 @@ requirejs.config({
 });
 
 window.name = "NG_DEFER_BOOTSTRAP!";
-
-
 
 define(['app']);

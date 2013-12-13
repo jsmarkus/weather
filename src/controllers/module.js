@@ -1,4 +1,4 @@
 define(function(require) {
     require('angular');
-    angular.module('services', []);
+    angular.module('controllers', []);
 });
