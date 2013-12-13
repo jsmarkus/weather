@@ -82,14 +82,14 @@ ant distconf.win
             <fileset dir="${sdk.nw}/l32" />
         </copy>
 
-        <concat binary="true" destfile="${build}/l32/app">
+        <concat binary="true" destfile="${build}/l32/weather">
             <fileset file="${build}/l32/nw" />
             <fileset file="${build}/app.nw" />
         </concat>
 
         <delete file="${build}/l32/nw" />
 
-        <chmod file="${build}/l32/app" perm="ugo+x" />
+        <chmod file="${build}/l32/weather" perm="ugo+x" />
     </target>
 
     <!-- Windows binary -->
