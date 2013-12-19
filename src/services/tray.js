@@ -36,7 +36,7 @@ define(function(require) {
         menu.append(miQuit);
 
         var tray = new this.gui.Tray({
-            icon: 'weather.ico',
+            icon: './weather.png',
             menu: menu
         });
         tray.on('click', function() {
